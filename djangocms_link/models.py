@@ -109,6 +109,8 @@ class AbstractLink(CMSPlugin):
         blank=True,
         max_length=255,
     )
+    relative = models.CharField(_("relative"), max_length=2048, blank=True, null=True,
+                                help_text=_("A relative link has priority over a text link"))
     phone = models.CharField(
         verbose_name=_('Phone'),
         blank=True,
@@ -137,6 +139,7 @@ class AbstractLink(CMSPlugin):
         parent_link=True,
         on_delete=models.CASCADE,
     )
+
 
     class Meta:
         abstract = True
@@ -197,6 +200,9 @@ class AbstractLink(CMSPlugin):
 
         elif self.mailto:
             link = 'mailto:{}'.format(self.mailto)
+
+        elif self.relative:
+            link = self.relative
 
         else:
             link = ''
