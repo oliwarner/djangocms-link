@@ -38,9 +38,9 @@ class IntranetURLValidator(URLValidator):
             self.host_re = ('(' + self.hostname_re + self.domain_re +
                 self.tld_re + '|' + intranet_host_re + '|localhost)')
             self.regex = re.compile(
-                r'^(?:[a-z0-9\.\-]*)://'
+                r'^((?:[a-z0-9\.\-]*)://'
                 r'(?:\S+(?::\S*)?@)?'
                 r'(?:' + self.ipv4_re + '|' + self.ipv6_re + '|' + self.host_re + ')'
-                r'(?::\d{2,5})?'
+                r'(?::\d{2,5})?)?'
                 r'(?:[/?#][^\s]*)?'
                 r'$', re.IGNORECASE)
